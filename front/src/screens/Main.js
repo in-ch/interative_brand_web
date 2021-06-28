@@ -11,14 +11,23 @@ const BG_ONE = styled.div`
     position: absolute;
     top:0px;left:0px;
     clip: rect( 0px, ${((props)=>props.width)}px, ${((props)=>props.height)}px, 0px );
+    transition: all 0.5s;
 `;
 
 const Main = () => {
 
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState(window.innerHeight);
-    const scrollEvent = () => {
-        console.log('Gd');
+    const [wheelIndex, setWheelIndex] = useState(0);
+    const scrollEvent = (e) => {
+        if(e.deltaY>0){
+            setWheelIndex(wheelIndex + 1);
+        } else if(wheelIndex<0) {
+            return;
+        } else {
+            setWheelIndex(wheelIndex - 1);
+        }
+        console.log(width/wheelIndex);
     };
 
     useEffect(() => {
@@ -27,11 +36,11 @@ const Main = () => {
           window.removeEventListener("scroll", scrollEvent);
         };
     });
-
+    // 무조건 100단위로 끊기 
     return (
         <>
-            <Container>
-                <BG_ONE height={100} width={width} />
+            <Container onWheel={scrollEvent}>
+                <BG_ONE height={height} width={wheelIndex < 1000  ? width/wheelIndex : width} />
             </Container>
             
         </>
