@@ -1,15 +1,23 @@
 import styled from "styled-components";
-
-const Container = styled.div`
-
-`;
+import { HelmetProvider } from "react-helmet-async";
+import { BrowserRouter as Router,Switch, Route, Redirect } from "react-router-dom";
+import routes from "./routes";
+import Main from "./screens/Main";
+import { GlobalStyles } from "./styles";
 
 const App = () => {
   return (
     <>
-      <Container>
-
-      </Container>
+      <HelmetProvider>
+        <GlobalStyles />
+        <Router>
+          <Switch>
+            <Route path={routes.home} exact>
+                <Main />
+            </Route>
+          </Switch>
+        </Router>
+      </HelmetProvider>
     </>
   );
 }
