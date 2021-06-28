@@ -2,7 +2,7 @@ import { useState,useEffect } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-    width:100%;height:100vh;position:relative;top:-${(props)=> props.top}px;transition:all 1s;
+    width:100%;height:100vh;position:relative;top:-${(props)=> props.top}px;transition:all 0.4s;
 `;
 
 const BG_ONE = styled.div`
@@ -11,7 +11,7 @@ const BG_ONE = styled.div`
     position: absolute;
     top:0px;left:0px;
     clip: rect( 0px, ${((props)=>props.width)}px, ${((props)=>props.height)}px, 0px );
-    transition: all 1s;
+    transition: all 0.4s;
 `;
 
 const BG_TWO = styled.div`
@@ -20,7 +20,9 @@ const BG_TWO = styled.div`
     position: absolute;
     top:0px;left:0px;
     clip: rect( 0px, ${((props)=>props.width)}px, ${((props)=>props.height)}px, 0px );
-    transition: all 1s;
+    transition: all 0.4s;
+    transform: scale(${(props)=>props.scale});
+    opacity: ${((props)=> 2 - props.scale)};
 `;
 
 const BG_THREE = styled.div`
@@ -28,11 +30,11 @@ const BG_THREE = styled.div`
     background-image: url(https://64.media.tumblr.com/828d52791d0db84fb0258e2966e80dec/tumblr_njvlsfFYlQ1qi73s5o1_1280.jpg);background-size:cover;
     position: absolute;
     top:0px;left:0px;
-    transition: all 0.5s;
+    transition: all 0.4s;
 `;
 
 const Container2 = styled.div`
-    width:100%;height:100vh;position:relative;position:relative;top:-${(props)=> props.top}px;transition:all 0.5s;
+    width:100%;height:100vh;position:relative;position:relative;top:-${(props)=> props.top}px;transition:all 0.4s;
 `;
 
 const style= {
@@ -66,19 +68,19 @@ const Main = () => {
         setCheck(false);
         setTimeout(()=>{
             setCheck(true);
-        },1000);
-        console.log(wheelIndex/10);
+        },200);
+        console.log(wheelIndex);
     };
 
     // 무조건 100단위로 끊기 
     return (
         <>
-            <Container top={wheelIndex > 36 ? height*(((wheelIndex-36)/height)*80) : 0 } onWheel={scrollEvent}>
+            <Container top={wheelIndex > 29 ? height*((wheelIndex-30)/10) : 0 } onWheel={scrollEvent}>
                 <BG_ONE height={height} width={wheelIndex < 10  ? width*(wheelIndex/10) : width} />
-                <BG_TWO height={9< wheelIndex && wheelIndex <20  ?  height*((wheelIndex-10)/10) : height } width={width} style={9< wheelIndex ? style.show : style.hidden}/>
+                <BG_TWO height={9< wheelIndex && wheelIndex <20  ?  height*((wheelIndex-10)/10) : height } width={width} style={9< wheelIndex ? style.show : style.hidden} scale={20< wheelIndex && wheelIndex <30 ? `1.${wheelIndex-20}` : '1'} />
             </Container>
-            <Container2 top={wheelIndex > 36 ? height*(((wheelIndex-36)/height)*80) : 0 } onWheel={scrollEvent} style={{background:'red'}}>
 
+            <Container2 top={wheelIndex > 29 ? height*((wheelIndex-30)/10) : 0 }  onWheel={scrollEvent} style={{background:'red'}}>
             </Container2>
             
         </>
