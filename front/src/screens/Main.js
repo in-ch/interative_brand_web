@@ -2,7 +2,7 @@ import { useState,useEffect } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-    width:100%;height:100vh;position:relative;top:-${(props)=> props.top}px;transition:all 0.5s;
+    width:100%;height:100vh;position:relative;top:-${(props)=> props.top}px;transition:all 1s;
 `;
 
 const BG_ONE = styled.div`
@@ -11,7 +11,7 @@ const BG_ONE = styled.div`
     position: absolute;
     top:0px;left:0px;
     clip: rect( 0px, ${((props)=>props.width)}px, ${((props)=>props.height)}px, 0px );
-    transition: all 0.5s;
+    transition: all 1s;
 `;
 
 const BG_TWO = styled.div`
@@ -20,7 +20,7 @@ const BG_TWO = styled.div`
     position: absolute;
     top:0px;left:0px;
     clip: rect( 0px, ${((props)=>props.width)}px, ${((props)=>props.height)}px, 0px );
-    transition: all 0.5s;
+    transition: all 1s;
 `;
 
 const BG_THREE = styled.div`
@@ -48,8 +48,14 @@ const Main = () => {
 
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState(window.innerHeight);
+    const [check,setCheck] = useState(true);
+
     const [wheelIndex, setWheelIndex] = useState(0);
     const scrollEvent = (e) => {
+        if(!check){
+            return;
+        }
+
         if(e.deltaY>0){
             setWheelIndex(wheelIndex + 1);
         } else if(wheelIndex<0) {
@@ -57,15 +63,19 @@ const Main = () => {
         } else {
             setWheelIndex(wheelIndex - 1);
         }
-        console.log(wheelIndex, height*((wheelIndex/height)*80));
+        setCheck(false);
+        setTimeout(()=>{
+            setCheck(true);
+        },1000);
+        console.log(wheelIndex/10);
     };
 
     // 무조건 100단위로 끊기 
     return (
         <>
             <Container top={wheelIndex > 36 ? height*(((wheelIndex-36)/height)*80) : 0 } onWheel={scrollEvent}>
-                <BG_ONE height={height} width={wheelIndex < 15  ? width*((wheelIndex/width)*80) : width} />
-                <BG_TWO height={15< wheelIndex && wheelIndex <35  ? height*(((wheelIndex-17)/height)*80) : height } width={width} style={15< wheelIndex ? style.show : style.hidden}/>
+                <BG_ONE height={height} width={wheelIndex < 10  ? width*(wheelIndex/10) : width} />
+                <BG_TWO height={9< wheelIndex && wheelIndex <20  ?  height*((wheelIndex-10)/10) : height } width={width} style={9< wheelIndex ? style.show : style.hidden}/>
             </Container>
             <Container2 top={wheelIndex > 36 ? height*(((wheelIndex-36)/height)*80) : 0 } onWheel={scrollEvent} style={{background:'red'}}>
 
