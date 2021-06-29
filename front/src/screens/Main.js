@@ -1,6 +1,8 @@
 import { useState,useEffect } from "react";
 import styled from "styled-components";
 
+const Wrapper = styled.div``;
+
 const Container = styled.div`
     width:100%;height:100vh;position:relative;top:-${(props)=> props.top}px;transition:all 0.4s;
 `;
@@ -11,7 +13,7 @@ const BG_ONE = styled.div`
     position: absolute;
     top:0px;left:0px;
     clip: rect( 0px, ${((props)=>props.width)}px, ${((props)=>props.height)}px, 0px );
-    transition: all 0.4s;
+    transition: all 0.5s;
 `;
 
 const BG_TWO = styled.div`
@@ -20,9 +22,7 @@ const BG_TWO = styled.div`
     position: absolute;
     top:0px;left:0px;
     clip: rect( 0px, ${((props)=>props.width)}px, ${((props)=>props.height)}px, 0px );
-    transition: all 0.4s;
-    transform: scale(${(props)=>props.scale});
-    opacity: ${((props)=> 2 - props.scale)};
+    transition: all 0.5s;
 `;
 
 const BG_THREE = styled.div`
@@ -35,6 +35,13 @@ const BG_THREE = styled.div`
 
 const Container2 = styled.div`
     width:100%;height:100vh;position:relative;position:relative;top:-${(props)=> props.top}px;transition:all 0.4s;
+`;
+
+const Content = styled.div`
+    width:100%;height:100vh;display:flex;
+`;
+const ContentDiv = styled.div`
+    flex:5;border:1px solid #000;display:flex;justify-item:center;
 `;
 
 const style= {
@@ -53,36 +60,71 @@ const Main = () => {
     const [check,setCheck] = useState(true);
 
     const [wheelIndex, setWheelIndex] = useState(0);
+    const [wheelIndex2, setWheelIndex2] = useState(0);
     const scrollEvent = (e) => {
         if(!check){
             return;
         }
 
         if(e.deltaY>0){
+            if(wheelIndex > 10){
+                return;
+            }
             setWheelIndex(wheelIndex + 1);
         } else if(wheelIndex<0) {
             return;
         } else {
+            if(wheelIndex2 > 0){
+                return;
+            }
             setWheelIndex(wheelIndex - 1);
         }
         setCheck(false);
         setTimeout(()=>{
             setCheck(true);
         },200);
-        console.log(wheelIndex);
+        console.log("첫번째 휠"+wheelIndex);
+    };
+
+    const scrollEvent2Page = (e) => {
+        if(!check){
+            return;
+        }
+        if(e.deltaY>0){
+            setWheelIndex2(wheelIndex2 + 1);
+        } else if(wheelIndex2<0) {
+            return;
+        } else {
+            setWheelIndex2(wheelIndex2 - 1);
+        }
+        setCheck(false);
+        setTimeout(()=>{
+            setCheck(true);
+        },200);
+        console.log("2번째 휠"+ wheelIndex2);
+        
     };
 
     // 무조건 100단위로 끊기 
     return (
         <>
-            <Container top={wheelIndex > 29 ? height*((wheelIndex-30)/10) : 0 } onWheel={scrollEvent}>
-                <BG_ONE height={height} width={wheelIndex < 10  ? width*(wheelIndex/10) : width} />
-                <BG_TWO height={9< wheelIndex && wheelIndex <20  ?  height*((wheelIndex-10)/10) : height } width={width} style={9< wheelIndex ? style.show : style.hidden} scale={20< wheelIndex && wheelIndex <30 ? `1.${wheelIndex-20}` : '1'} />
-            </Container>
+            <Wrapper  onWheel={scrollEvent}>
+                <Container top={wheelIndex > 9? height*((wheelIndex-10)) : 0 }>
+                    <BG_ONE height={height} width={wheelIndex < 5  ? width*(wheelIndex/5) : width} />
+                    <BG_TWO height={4< wheelIndex && wheelIndex <10  ?  height*((wheelIndex-5)/5) : height } width={width} style={4< wheelIndex ? style.show : style.hidden} />
+                </Container>
 
-            <Container2 top={wheelIndex > 29 ? height*((wheelIndex-30)/10) : 0 }  onWheel={scrollEvent} style={{background:'red'}}>
-            </Container2>
-            
+                <Container2 onWheel={scrollEvent2Page} top={wheelIndex > 9 ? height*((wheelIndex-10)) : 0 }>
+                    <Content>
+                        <ContentDiv>
+                            
+                        </ContentDiv>
+                        <ContentDiv>
+                            
+                        </ContentDiv>
+                    </Content>
+                </Container2>
+            </Wrapper>
         </>
     );
 };
