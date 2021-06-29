@@ -41,7 +41,15 @@ const Content = styled.div`
     width:100%;height:100vh;display:flex;
 `;
 const ContentDiv = styled.div`
-    flex:5;border:1px solid #000;display:flex;justify-item:center;
+    flex:5;display:flex;align-items: center;
+    justify-content: space-between;
+    div{
+        transition: all 1s;
+        width:300px;height:300px;margin:0 auto;text-align:center;
+        p{
+            line-height: 60px;opacity:0.3;transition: all 1s;
+        }
+    }
 `;
 
 const style= {
@@ -50,6 +58,35 @@ const style= {
     },
     hidden: {
         display:"none",
+    },
+    fontSizeBig: {
+        fontSize:"35px",
+        opacity:1,
+    },
+    fontSizeNormal:{
+        fontSize:"20px",
+        opacity:0.3
+    },
+
+    bg1:{
+        backgroundImage: "url(https://cdn.shopify.com/s/files/1/0015/4530/6173/products/collinastradaSS20_17of73_1200x.jpg?v=1621895070)",
+        backgroundSize:"cover"
+    },
+    bg2:{
+        backgroundImage: "url(https://cdn.shopify.com/s/files/1/0015/4530/6173/products/collinastradaSS20_15of73_1200x.jpg?v=1621895070)",
+        backgroundSize:"cover"
+    },
+    bg3:{
+        backgroundImage: "url(https://cdn.shopify.com/s/files/1/0015/4530/6173/products/collinastradaSS20_16of73_1200x.jpg?v=1621895070)",
+        backgroundSize:"cover"
+    },
+    bg4:{
+        backgroundImage: "url(https://cdn.shopify.com/s/files/1/0015/4530/6173/products/collinastradaSS20_18of73_1200x.jpg?v=1621895070)",
+        backgroundSize:"cover"
+    },
+    bg5:{
+        backgroundImage: "url(https://cdn.shopify.com/s/files/1/0015/4530/6173/products/kordal-ss21-shot-4_1200x.jpg?v=1620930547)",
+        backgroundSize:"cover"
     }
 }
 
@@ -116,14 +153,26 @@ const Main = () => {
 
                 <Container2 onWheel={scrollEvent2Page} top={wheelIndex > 9 ? height*((wheelIndex-10)) : 0 }>
                     <Content>
-                        <ContentDiv>
-                            
+                        <ContentDiv  style={{backgroundImage:"url(https://i.pinimg.com/564x/d3/f8/10/d3f81017090b5bfa809768f5578c719b.jpg)",backgroundSize:"cover"}}>
+                            <div style={{background:'white',border:"2px solid black"}}>
+                                <p style={ wheelIndex2 < 2 ? style.fontSizeBig : style.fontSizeNormal}>Awesome</p>
+                                <p style={ wheelIndex2 > 1 && wheelIndex2 < 4? style.fontSizeBig : style.fontSizeNormal}>Tiny</p>
+                                <p style={ wheelIndex2 > 3 && wheelIndex2 < 7 ? style.fontSizeBig : style.fontSizeNormal}>Amazing</p>
+                                <p style={ wheelIndex2 > 6 && wheelIndex2 < 9 ? style.fontSizeBig : style.fontSizeNormal}>Natural</p>
+                                <p style={ wheelIndex2 > 8 && wheelIndex2 < 12 ? style.fontSizeBig : style.fontSizeNormal}>Every</p>
+                            </div>
                         </ContentDiv>
                         <ContentDiv>
-                            
+                            <div style={style.default, wheelIndex2 < 2 ? style.bg1 : wheelIndex2 > 1 && wheelIndex2 < 4 ? style.bg2 : wheelIndex2 > 3 && wheelIndex2 < 7  ? style.bg3 : wheelIndex2 > 6 && wheelIndex2 < 9 ? style.bg4 : style.bg5}>
+
+                            </div>
                         </ContentDiv>
                     </Content>
                 </Container2>
+
+                <Container3>
+                    
+                </Container3>
             </Wrapper>
         </>
     );
