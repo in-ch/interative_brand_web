@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react";
 import styled from "styled-components";
 import Intro from "../components/Intro";
+import useWindowSize from "../hooks/useResize";
 
 const Wrapper = styled.div``;
 
@@ -162,7 +163,7 @@ const Main = () => {
     // 무조건 100단위로 끊기 
     return (
         <>
-            <Wrapper  onWheel={scrollEvent}>
+            <Wrapper onWheel={scrollEvent}>
                 <ContainerIntro top={wheelIndex > 9 ? height*((wheelIndex-10)) : 0 }>
                     <Intro text1={'asdf'} text2={'fdfa'} text3={'zvvvv'} text4={'vvvvv'}/>
                 </ContainerIntro>
