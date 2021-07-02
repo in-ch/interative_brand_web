@@ -15,7 +15,9 @@ export const GlobalStyles = createGlobalStyle`
     }
 `;
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+    min-width:1000px;
+`;
 
 export const ContainerIntro = styled.div`
     width:100%;height:100vh;position:absolute;top:-${(props)=> props.top}px;transition:all 0.4s;

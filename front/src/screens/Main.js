@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Intro from "../components/Intro";
 import useWindowSize from "../hooks/useResize";
 import {Wrapper, Container, BG_ONE, BG_TWO, BG_THREE, Container2, Container3, Content, ContentDiv, ContainerIntro, style } from "../styles";
-
+import Header from "../components/Header";
 
 const Main = () => {
 
@@ -72,6 +72,7 @@ const Main = () => {
 
     return (
         <>
+            <Header />
             <Wrapper onWheel={scrollEvent}>
                 <ContainerIntro top={wheelIndex > 9 ? height*((wheelIndex-10)) : 0 }>
                     <Intro text1={'asdf'} text2={'fdfa'} text3={'zvvvv'} text4={'vvvvv'}/>
