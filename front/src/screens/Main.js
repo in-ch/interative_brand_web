@@ -72,7 +72,7 @@ const Main = () => {
 
     return (
         <>
-            <Header />
+            <Header/>
             <Wrapper onWheel={scrollEvent}>
                 <ContainerIntro top={wheelIndex > 9 ? height*((wheelIndex-10)) : 0 }>
                     <Intro text1={'asdf'} text2={'fdfa'} text3={'zvvvv'} text4={'vvvvv'}/>
