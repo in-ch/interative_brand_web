@@ -14,9 +14,11 @@ const Main = () => {
     const [wheelIndex, setWheelIndex] = useState(0);
     const [wheelIndex2, setWheelIndex2] = useState(0);
     const scrollEvent = (e) => {
+        
         if(!check){
             return;
         }
+        setCheck(false);
 
         if(e.deltaY>0){
             if(wheelIndex > 10){
@@ -31,7 +33,6 @@ const Main = () => {
             }
             setWheelIndex(wheelIndex - 1);
         }
-        setCheck(false);
         setTimeout(()=>{
             setCheck(true);
         },200);
@@ -42,6 +43,8 @@ const Main = () => {
         if(!check){
             return;
         }
+        setCheck(false);
+
         if(wheelIndex2 > 10){
             console.log("adsg");
         }
@@ -52,7 +55,6 @@ const Main = () => {
         } else {
             setWheelIndex2(wheelIndex2 - 1);
         }
-        setCheck(false);
         setTimeout(()=>{
             setCheck(true);
         },200);
@@ -72,7 +74,7 @@ const Main = () => {
 
     return (
         <>
-            <Header/>
+            <Header white={true} />
             <Wrapper onWheel={scrollEvent}>
                 <ContainerIntro top={wheelIndex > 9 ? height*((wheelIndex-10)) : 0 }>
                     <Intro text1={'asdf'} text2={'fdfa'} text3={'zvvvv'} text4={'vvvvv'}/>
